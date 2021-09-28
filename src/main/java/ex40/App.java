@@ -1,6 +1,6 @@
-package ex39;
+package ex40;
 /*
- *  UCF COP3330 Fall 2021 Exercise 39 Solution
+ *  UCF COP3330 Fall 2021 Exercise 40 Solution
  *  Copyright 2021 Merrek DeBolt
  */
 
@@ -51,19 +51,31 @@ public class App {
         }
     };
 
-    public static void main(String[] args)
+    public static ArrayList<Map<String, String>> filterMaps(ArrayList<Map<String, String>> maps, String filter)
     {
-        ArrayList<Map<String, String>> maps = createMaps();
-        Collections.sort(maps, mapComparator);
+        ArrayList<Map<String, String>> newMaps = new ArrayList<Map<String, String>>();
 
+        Map<String, String> map;
+        for (int index = 0; index < maps.size(); index++)
+        {
+            map = maps.get(index);
+            if (map.get("First Name").contains(filter) || map.get("Last Name").contains(filter))
+                newMaps.add(map);
+        }
+
+        return newMaps;
+    }
+
+    public static void printTable(ArrayList<Map<String, String>> filteredMaps)
+    {
         System.out.println(String.format(" %20s | %20s | %20s", "Name", "Position", "Separation Date"));
         System.out.println("----------------------|----------------------|----------------------");
 
         Map<String, String> map;
         String name, position, date;
-        for (int index = 0; index < maps.size(); index++)
+        for (int index = 0; index < filteredMaps.size(); index++)
         {
-            map = maps.get(index);
+            map = filteredMaps.get(index);
 
             name = map.get("First Name") + " " + map.get("Last Name");
             position = map.get("Position");
@@ -71,5 +83,22 @@ public class App {
 
             System.out.println(String.format(" %20s | %20s | %20s ", name, position, date));
         }
+    }
+
+    public static void main(String[] args)
+    {
+        ArrayList<Map<String, String>> maps = createMaps();
+
+        String input;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter a search string: ");
+        input = scanner.nextLine();
+
+        ArrayList<Map<String, String>> filteredMaps = filterMaps(maps, input);
+
+        Collections.sort(filteredMaps, mapComparator);
+
+        printTable(filteredMaps);
     }
 }
