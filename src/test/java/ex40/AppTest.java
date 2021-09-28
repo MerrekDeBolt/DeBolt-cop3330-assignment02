@@ -1,6 +1,6 @@
-package ex39;
+package ex40;
 
-import ex39.App;
+import ex40.App;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -22,21 +22,14 @@ public class AppTest
     {
         App app = new App();
         ArrayList<Map<String, String>> maps = app.createMaps();
-        Collections.sort(maps, app.mapComparator);
+        ArrayList<Map<String, String>> filteredMaps = app.filterMaps(maps, "Jac");
+        Collections.sort(filteredMaps, app.mapComparator);
 
         Map<String, String> map;
 
-        map = maps.get(0);
+        map = filteredMaps.get(0);
         assertEquals(map.get("First Name"), "Jacquelyn");
-        map = maps.get(1);
+        map = filteredMaps.get(1);
         assertEquals(map.get("First Name"), "Jake");
-        map = maps.get(2);
-        assertEquals(map.get("First Name"), "John");
-        map = maps.get(3);
-        assertEquals(map.get("First Name"), "Michaela");
-        map = maps.get(4);
-        assertEquals(map.get("First Name"), "Sally");
-        map = maps.get(5);
-        assertEquals(map.get("First Name"), "Tou");
     }
 }
