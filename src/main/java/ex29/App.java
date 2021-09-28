@@ -9,37 +9,49 @@ import java.util.Scanner;
 
 public class App {
 
+    public static int getYears(double rate)
+    {
+        return (int) (72 / rate);
+    }
+
+    public static int validReturn(String input)
+    {
+        int rate = -1;
+        try { rate = Integer.parseInt(input); }
+        catch (Exception e)
+        {
+            System.out.println("Sorry. That's not a valid input.");
+            rate = -1;
+        }
+
+        if (rate < 0)
+        {
+            System.out.println("Sorry. That's not a valid input.");
+            rate = -1;
+        }
+        else if (rate == 0)
+        {
+            System.out.println("Sorry. That is the number zero actually.");
+            rate = -1;
+        }
+
+        return rate;
+    }
+
     public static void main(String[] args)
     {
         String input;
-        double years, rate = -1;
+        int rate = -1;
+        boolean rateIsValid = false;
         Scanner scanner = new Scanner(System.in);
 
         while (rate == -1)
         {
             System.out.println("What is the rate of return? ");
-
             input = scanner.nextLine();
-            try { rate = Double.parseDouble(input); }
-            catch (Exception e)
-            {
-                System.out.println("Sorry. That's not a valid input.");
-                rate = -1;
-            }
-
-            if (rate < 0)
-            {
-                System.out.println("Sorry. That's not a valid input.");
-                rate = -1;
-            }
-            else if (rate == 0)
-            {
-                System.out.println("Sorry. That is the number zero actually.");
-                rate = -1;
-            }
+            rate = validReturn(input);
         }
 
-        years = 72 / rate;
-        System.out.println(String.format("It will take %f years to double your initial investment.", years));
+        System.out.println(String.format("It will take %d years to double your initial investment.", getYears(rate)));
     }
 }

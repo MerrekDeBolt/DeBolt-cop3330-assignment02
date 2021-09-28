@@ -71,6 +71,12 @@ public class App {
         return Math.sqrt(total);
     }
 
+    public static String stdAsString(double num)
+    {
+        String val = String.format("%.2f", num);
+        return val;
+    }
+
     public static void main(String[] args)
     {
         ArrayList<Integer> responses = takeInputs();

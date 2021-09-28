@@ -1,5 +1,6 @@
-package org.example;
+package ex24;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -15,6 +16,8 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        App app = new App();
+        assertEquals( true, app.isAnagram("tone", "note") );
+        assertEquals( false, app.isAnagram("atone", "note") );
     }
 }
